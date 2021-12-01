@@ -1,0 +1,43 @@
+---
+title: "SDS 192 2021 Fall PS07"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Section 01
+## GitHub Documents
+
+This is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
+
+## Including Code
+
+You can include R code in the document as follows:
+```{r}
+# Load all packages here
+library(ggplot2)
+library(dplyr)
+library(babynames)
+```
+
+```{r}
+# Set up the dataframe for visualization
+babynames_riley_casey <- babynames %>% 
+  filter((name == "Riley" | name == "Casey")) %>% 
+           group_by(year)
+View(babynames_riley_casey)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+ggplot(data = babynames_riley_casey, 
+       mapping = aes(x = year, y = prop, group = sex, color=sex)) +
+  geom_line()+
+  facet_wrap(~ name)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
